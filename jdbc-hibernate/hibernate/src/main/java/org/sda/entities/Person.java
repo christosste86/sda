@@ -1,21 +1,34 @@
 package org.sda.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.*;
 
-@Entity
+import javax.persistence.*;
+
+
+@Entity // annotation from JPA - Hibernate
+@Table(name = "people")
+@Data // = @Getter + @Setter
+//@Getter
+//@Setter
+@NoArgsConstructor
+//@AllArgsConstructor
+//@RequiredArgsConstructor // constructor for attribute which are private and final
 public class Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // annotation from JPA - Hibernate
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // annotation from JPA - Hibernate
     private int id;
-    private String firstName;
-    private String lastName;
 
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    @Embedded
+    private Name name;
+
+//    @Column(name = "first_name")
+//    private String firstName;
+//
+//    @Column(name = "last_name")
+//    private String lastName;
+
+    public Person(Name name) {
+        this.name = name;
     }
 }
