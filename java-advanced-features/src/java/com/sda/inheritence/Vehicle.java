@@ -1,17 +1,19 @@
 package com.sda.inheritence;
 
-public class Vehicle { // class / object
+import com.sda.inheritence.enums.Transmition;
+
+public abstract class Vehicle { // class / object , Vehicle can be also abstract class
     private String color;
-    private String transmition;
+    private Transmition transmition;
     private String brand;
     private int wheelCount;
     private String fuel;
 
     public Vehicle() {
-        this("red", "manual", "opel", 4, "diesel");
+        this("red", Transmition.MANUAL, "opel", 4, "diesel");
     }
 
-    public Vehicle(String color, String transmition, String brand, int wheelCount, String fuel) {
+    public Vehicle(String color, Transmition transmition, String brand, int wheelCount, String fuel) {
         this.color = color;
         this.transmition = transmition;
         this.brand = brand;
@@ -27,11 +29,11 @@ public class Vehicle { // class / object
         this.color = color;
     }
 
-    public String getTransmition() {
+    public Transmition getTransmition() {
         return transmition;
     }
 
-    public void setTransmition(String transmition) {
+    public void setTransmition(Transmition transmition) {
         this.transmition = transmition;
     }
 
@@ -59,12 +61,10 @@ public class Vehicle { // class / object
         this.fuel = fuel;
     }
 
-    public void lightOn(){
-
-    }
+    abstract public void lightOn();
 
     public void move(){
-
+        System.out.println(this.getClass().getSimpleName() + ": I am moving");
     }
 
     @Override

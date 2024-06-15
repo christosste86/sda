@@ -1,5 +1,7 @@
 package com.sda.inheritence;
 
+import com.sda.inheritence.enums.Transmition;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,9 @@ public class App {
         System.out.println(car);
         System.out.println(moto);
 
-        Car car1 = new Car("purple", "manual", "opel", 4, "diesel"); // instancia objektu
+        Car car1 = new Car("purple", Transmition.AUTOMATIC, "opel", 4, "diesel"); // instancia objektu
         System.out.println(car1);
+
 
         // Polymorfizmus
         Garage garage = new Garage(); // instancia objektu
@@ -27,6 +30,20 @@ public class App {
 
         List<Vehicle> vehicles = new ArrayList<>();
         vehicles.add(car);
-        vehicles.add(moto);
+
+
+        for (Vehicle v : vehicles) {
+            v.move();
+        }
+
+        System.out.println(Transmition.AUTOMATIC.getGears());
+
+        for (Transmition t : Transmition.values()){
+            System.out.println(t);
+            System.out.println(t.getGears());
+        }
+
+
+
     }
 }
