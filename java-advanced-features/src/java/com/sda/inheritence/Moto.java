@@ -1,6 +1,6 @@
 package com.sda.inheritence;
 
-public class Moto extends Vehicle{
+public class Moto extends Vehicle {
     @Override
     public void lightOn() {
 
