@@ -11,5 +11,7 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <mapping package="org.sda" />
         <mapping class="org.sda.models.Bird" />
+        <mapping class="org.sda.models.Nest" />
+        <mapping class="org.sda.models.User" />
     </session-factory>
 </hibernate-configuration>
