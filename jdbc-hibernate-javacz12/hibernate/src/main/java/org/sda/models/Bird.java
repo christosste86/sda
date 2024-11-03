@@ -17,6 +17,10 @@ public class Bird {
     private boolean canFly;
     private int weight;
 
+    @ManyToOne
+    @JoinColumn(name = "nests_id")
+    private Nest nest;
+
     public Bird() {
     }
 
@@ -28,6 +32,10 @@ public class Bird {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public void setNest(Nest nest) {
+        this.nest = nest;
     }
 
     @Override
