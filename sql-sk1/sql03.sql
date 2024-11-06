@@ -83,7 +83,44 @@ delimiter ;
 -- Update the mileage for a specific car to test if the trigger executes
 update cars set mileage = 109000 where id = 1;
 
+-- Procedure to add a new rental record by linking a customer to a car based on name and license plate
+delimiter //
+create procedure addRental(
+in customer_first_name varchar(25), 
+in customer_last_name varchar(50),
+in car_lincense_plate varchar(7))
+begin
+declare customer_id int;
+declare car_id int;
 
+SELECT 
+    id
+INTO customer_id FROM
+    customers
+WHERE
+    first_name = customer_first_name
+        AND last_name = customer_last_name;
+
+SELECT 
+    id
+INTO car_id FROM
+    cars
+WHERE
+    license_plate = car_lincense_plate;
+
+if customer_id is not null and car_id is not null 
+then 
+insert into rentals (customer_id, car_id) 
+values (customer_id, car_id);
+else
+signal sqlstate '45000'
+set message_text = 'customer or car not found';
+end if;
+end //
+delimiter ;
+
+call addRental('Stefan', 'Fitera', 'AB123AC');
+call addRental('Marek', 'Fitera', 'AB123AC');
 
 
 
