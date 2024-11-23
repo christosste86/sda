@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Bird Details</title>
+</head>
+<body>
+<main>
+    <h1 th:text="${bird.name}"></h1>
+    <ul>
+        <li th:text="${bird.id}"></li>
+        <li th:text="${bird.canFly}"></li>
+        <li th:text="${bird.weight}"></li>
+    </ul>
+</main>
+
+</body>
+</html>
