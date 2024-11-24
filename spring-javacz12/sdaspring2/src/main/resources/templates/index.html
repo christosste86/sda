@@ -11,6 +11,19 @@
 <main>
     <p th:text="${birds.size()}"></p>
     <p th:unless="${birds.size()}">No birds in Birdhouse</p>
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/}">Home</a>
+            </li>
+            <li>
+                <a th:href="@{/flying-jpql}">Find flying birds JPQL</a>
+            </li>
+            <li>
+                <a th:href="@{/flying-native}">Find flying birds native</a>
+            </li>
+        </ul>
+    </nav>
     <h5>Search</h5>
     <form th:action="@{/}" method="get">
         <input type="text" name="search">
@@ -23,6 +36,8 @@
             <th>Can Fly</th>
             <th>Weight in grams</th>
             <th>Details</th>
+            <th>Delete</th>
+            <th>Increase Weight</th>
         </tr>
         </thead>
         <tbody>
@@ -37,8 +52,18 @@
             <td th:text="*{canFly}"></td>
             <td th:text="*{weight}"></td>
             <td>
-<!--                <a th:href="|/bird-details/${bird.id}|">View details</a>-->
+                <!--                <a th:href="|/bird-details/${bird.id}|">View details</a>-->
                 <a th:href="@{/bird-details/{bird}(bird=${bird.id})}">View details</a>
+            </td>
+            <td>
+                <form method="get" th:action="@{/delete/{id} (id = *{id})}">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+            <td>
+                <form method="get" th:action="@{/increase/{id} (id = *{id})}">
+                    <button type="submit">+50 g</button>
+                </form>
             </td>
         </tr>
         </tbody>
