@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+/*@Service
 //@Qualifier("birdServiceList")
 public class BirdServiceImpl implements BirdService {
 
@@ -36,4 +36,4 @@ public class BirdServiceImpl implements BirdService {
         }
         return birds;
     }
-}
+}*/
