@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Add bird</title>
+</head>
+<body>
+<main>
+    <form th:action="@{/add-bird}" method="post">
+        <div>
+            <label for="name">Name: </label>
+            <input id="name" type="text" name="name">
+        </div>
+        <div>
+            <label for="canFly">Can fly: </label>
+            <input id="canFly" type="checkbox" name="canFly">
+        </div>
+        <div>
+            <label for="weight">Weight: </label>
+            <input id="weight" type="number" name="weight" min="0" max="250000">
+        </div>
+        <button type="submit">Add bird</button>
+    </form>
+</main>
+
+</body>
+</html>

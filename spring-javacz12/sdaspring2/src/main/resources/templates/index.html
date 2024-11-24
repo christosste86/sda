@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Birds</title>
+</head>
+<body>
+<header>
+    <h1 th:text="${welcomeString ?: 'welcomeString is not set'}">Welcome to the BirdHouse</h1>
+</header>
+<main>
+    <p th:text="${birds.size()}"></p>
+    <p th:unless="${birds.size()}">No birds in Birdhouse</p>
+    <h5>Search</h5>
+    <form th:action="@{/}" method="get">
+        <input type="text" name="search">
+        <button type="submit">Search</button>
+    </form>
+    <table th:if="${birds.size() > 0}">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Can Fly</th>
+            <th>Weight in grams</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bird : ${birds}" th:object="${bird}">
+            <!--          <td th:text="${bird.getName()}"></td>-->
+            <!--            <td th:text="${bird.isCanFly()}"></td>-->
+            <!--            <td th:text="${bird.getWeight()}"></td>-->
+            <!--            <td th:text="${bird.name}"></td>-->
+            <!--            <td th:text="${bird.canFly}"></td>-->
+            <!--            <td th:text="${bird.weight}"></td> -->
+            <td th:text="*{name}"></td>
+            <td th:text="*{canFly}"></td>
+            <td th:text="*{weight}"></td>
+            <td>
+<!--                <a th:href="|/bird-details/${bird.id}|">View details</a>-->
+                <a th:href="@{/bird-details/{bird}(bird=${bird.id})}">View details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/add-bird" th:href="@{/add-bird}">Add new Bird</a>
+</main>
+</body>
+</html>
