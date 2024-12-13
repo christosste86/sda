@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Bird Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="body-box">
+    <header>
+
+    </header>
+
+    <main>
+        <h1 th:text="${bird.name}"></h1>
+
+        <ul>
+            <li th:text="${bird.id}"></li>
+            <li th:text="${bird.canFly}"></li>
+            <li th:text="${bird.weight}"></li>
+        </ul>
+
+        <form id="add" th:action="@{/add-bird}" method="post">
+            <div class="div-add">
+                <label for="name">Name: </label>
+                <input id="name" type="text" name="name">
+            </div>
+            <div class="div-add">
+                <label for="canFly">Can fly: </label>
+                <input id="canFly" type="checkbox" name="canFly">
+            </div>
+            <div class="div-add">
+                <label for="weight">Weight: </label>
+                <input id="weight" type="number" name="weight" min="0" max="250000">
+            </div>
+            <button type="submit">Add bird</button>
+        </form>
+
+    </main>
+
+    <footer>
+        <p>©2024 <a th:href="@{/}">SDA</a></p>
+    </footer>
+</div>
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+</html>
