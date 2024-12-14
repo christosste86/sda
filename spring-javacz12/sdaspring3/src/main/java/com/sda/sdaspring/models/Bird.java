@@ -4,11 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "birds")
-public class Bird {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Bird extends BaseEntity{
 
     @Column(nullable = false)
     private String name;
@@ -17,6 +13,10 @@ public class Bird {
     private boolean canFly;
     private int weight;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tracking_device_id", referencedColumnName = "id")
+    private TrackingDevice trackingDevice;
+
     public Bird() {
     }
 
@@ -24,10 +24,6 @@ public class Bird {
         this.name = name;
         this.canFly = canFly;
         this.weight = weight;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getName() {
@@ -42,7 +38,15 @@ public class Bird {
         return weight;
     }
 
+    public TrackingDevice getTrackingDevice() {
+        return trackingDevice;
+    }
+
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public void setTrackingDevice(TrackingDevice trackingDevice) {
+        this.trackingDevice = trackingDevice;
     }
 }

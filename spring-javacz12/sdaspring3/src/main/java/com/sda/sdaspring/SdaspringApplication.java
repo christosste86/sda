@@ -1,6 +1,7 @@
 package com.sda.sdaspring;
 
 import com.sda.sdaspring.models.Bird;
+import com.sda.sdaspring.models.TrackingDevice;
 import com.sda.sdaspring.repositories.BirdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -48,12 +49,12 @@ public class SdaspringApplication implements CommandLineRunner {
         ));
 
 
-//        List<TrackingDevice> trackingDevices = List.of(
-//                new TrackingDevice("TD-001", "2024-01-01"),
-//                new TrackingDevice("TD-002", "2024-02-01"),
-//                new TrackingDevice("TD-003", "2024-03-01"),
-//                new TrackingDevice("TD-004", "2024-04-01")
-//        );
+        List<TrackingDevice> trackingDevices = List.of(
+                new TrackingDevice("TD-001", "2024-01-01"),
+                new TrackingDevice("TD-002", "2024-02-01"),
+                new TrackingDevice("TD-003", "2024-03-01"),
+                new TrackingDevice("TD-004", "2024-04-01")
+        );
 //
 //        Nest nest1 = new Nest("Tree Nest", 5, "Twigs");
 //        Nest nest2 = new Nest("Ground Nest", 3, "Grass");
@@ -85,10 +86,10 @@ public class SdaspringApplication implements CommandLineRunner {
 
         for (int i = 0; i < birds.size(); i++) {
             Bird bird = birds.get(i);
-//            if (i < trackingDevices.size() ){
-//                TrackingDevice trackingDevice = trackingDevices.get(i);
-//                bird.setTrackingDevice(trackingDevice);
-//            }
+            if (i < trackingDevices.size() ){
+                TrackingDevice trackingDevice = trackingDevices.get(i);
+                bird.setTrackingDevice(trackingDevice);
+            }
             birdRepository.save(bird);
         }
     }

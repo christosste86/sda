@@ -18,6 +18,18 @@
             <li th:text="${bird.id}"></li>
             <li th:text="${bird.canFly}"></li>
             <li th:text="${bird.weight}"></li>
+            <li th:if="${bird.trackingDevice != null}">
+                <h4>Tracking Device</h4>
+                <ul>
+                    <!-- na ukazku vnorenia takto inline v html nepiste -->
+                    <li>
+                        <strong>Serial Number: </strong>
+                        <span th:text="${bird.trackingDevice.serialNumber}"></span>
+                    </li>
+                    <!-- na ukazku vnorenia takto inline v html nepiste -->
+                    <li> <strong>Activation Date: </strong> <span th:text="${bird.trackingDevice.activationDate}"></span> </li> <!-- takto inline v html piste -->
+                </ul>
+            </li>
         </ul>
 
         <form id="add" th:action="@{/add-bird}" method="post">
