@@ -50,7 +50,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="bird : ${birds}" th:object="${bird}">
+            <tr th:each="bird : ${birds}" th:object="${bird}" th:classappend="${bird.foods.size() > 0} ? 'has-food' : ''">
                 <!--          <td th:text="${bird.getName()}"></td>-->
                 <!--            <td th:text="${bird.isCanFly()}"></td>-->
                 <!--            <td th:text="${bird.getWeight()}"></td>-->

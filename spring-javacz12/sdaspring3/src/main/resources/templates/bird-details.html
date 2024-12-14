@@ -46,6 +46,18 @@
             </li>
         </ul>
 
+        <form class="add-food" th:action="@{/bird-details/{birdId}/add-food(birdId=${bird.id})}" method="post">
+            <label for="foodSelect">Add Food:</label>
+            <select name="foodId" id="foodSelect" required>
+                <option value="" disabled selected>Select a food</option>
+                <option th:each="food : ${foods}" th:value="${food.id}" th:text="${food.name}"></option>
+            </select>
+
+            <button type="submit">Add Food</button>
+        </form>
+
+
+
         <form th:replace="~{fragments/add-form :: create-bird-form}"></form>
 
     </main>

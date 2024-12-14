@@ -110,5 +110,11 @@ public class SdaspringApplication implements CommandLineRunner {
         user.setPassword(passwordEncoder.encode("123"));
         user.setRoles(List.of("ROLE_USER"));
         userRepository.save(user);
+
+        User admin = new User();
+        admin.setName("Admin");
+        admin.setPassword(passwordEncoder.encode("456"));
+        admin.setRoles(List.of("ROLE_ADMIN", "ROLE_USER"));
+        userRepository.save(admin);
     }
 }
