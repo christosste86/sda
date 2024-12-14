@@ -1,16 +1,16 @@
 package com.sda.sdaspring;
 
-import com.sda.sdaspring.models.Bird;
-import com.sda.sdaspring.models.Food;
-import com.sda.sdaspring.models.Nest;
-import com.sda.sdaspring.models.TrackingDevice;
+import com.sda.sdaspring.models.*;
 import com.sda.sdaspring.repositories.BirdRepository;
 import com.sda.sdaspring.repositories.FoodRepository;
 import com.sda.sdaspring.repositories.NestRepository;
+
+import com.sda.sdaspring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +21,17 @@ public class SdaspringApplication implements CommandLineRunner {
     private final BirdRepository birdRepository;
     private final NestRepository nestRepository;
     private final FoodRepository foodRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public SdaspringApplication(BirdRepository birdRepository, NestRepository nestRepository, FoodRepository foodRepository) {
+    public SdaspringApplication(BirdRepository birdRepository, NestRepository nestRepository, FoodRepository foodRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.birdRepository = birdRepository;
         this.nestRepository = nestRepository;
         this.foodRepository = foodRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -100,5 +104,11 @@ public class SdaspringApplication implements CommandLineRunner {
             }
             birdRepository.save(bird);
         }
+
+        User user = new User();
+        user.setName("John");
+        user.setPassword(passwordEncoder.encode("123"));
+        user.setRoles(List.of("ROLE_USER"));
+        userRepository.save(user);
     }
 }
