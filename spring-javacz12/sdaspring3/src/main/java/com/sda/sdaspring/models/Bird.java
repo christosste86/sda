@@ -1,6 +1,7 @@
 package com.sda.sdaspring.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "birds")
@@ -16,6 +17,18 @@ public class Bird extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tracking_device_id", referencedColumnName = "id")
     private TrackingDevice trackingDevice;
+
+    @ManyToOne
+    @JoinColumn(name = "nest_id", referencedColumnName = "id")
+    Nest nest;
+
+    @ManyToMany
+    @JoinTable(
+            name = "birds_foods",
+            joinColumns = @JoinColumn(name = "bird_id"),
+            inverseJoinColumns =   @JoinColumn(name = "food_id")
+    )
+    private List<Food> foods;
 
     public Bird() {
     }
@@ -48,5 +61,21 @@ public class Bird extends BaseEntity{
 
     public void setTrackingDevice(TrackingDevice trackingDevice) {
         this.trackingDevice = trackingDevice;
+    }
+
+    public Nest getNest() {
+        return nest;
+    }
+
+    public void setNest(Nest nest) {
+        this.nest = nest;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
 }

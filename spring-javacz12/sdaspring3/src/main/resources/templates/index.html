@@ -71,21 +71,7 @@
             </tbody>
         </table>
 
-        <form id="add" th:action="@{/add-bird}" method="post">
-            <div class="div-add">
-                <label for="name">Name: </label>
-                <input id="name" type="text" name="name">
-            </div>
-            <div class="div-add">
-                <label for="canFly">Can fly: </label>
-                <input id="canFly" type="checkbox" name="canFly">
-            </div>
-            <div class="div-add">
-                <label for="weight">Weight: </label>
-                <input id="weight" type="number" name="weight" min="0" max="250000">
-            </div>
-            <button type="submit">Add bird</button>
-        </form>
+        <form th:replace="~{fragments/add-form :: create-bird-form}"></form>
 
     </main>
 

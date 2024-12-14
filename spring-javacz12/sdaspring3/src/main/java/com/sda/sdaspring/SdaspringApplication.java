@@ -1,8 +1,12 @@
 package com.sda.sdaspring;
 
 import com.sda.sdaspring.models.Bird;
+import com.sda.sdaspring.models.Food;
+import com.sda.sdaspring.models.Nest;
 import com.sda.sdaspring.models.TrackingDevice;
 import com.sda.sdaspring.repositories.BirdRepository;
+import com.sda.sdaspring.repositories.FoodRepository;
+import com.sda.sdaspring.repositories.NestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,11 +19,15 @@ import java.util.List;
 public class SdaspringApplication implements CommandLineRunner {
 
     private final BirdRepository birdRepository;
+    private final NestRepository nestRepository;
+    private final FoodRepository foodRepository;
 
 
     @Autowired
-    public SdaspringApplication(BirdRepository birdRepository) {
+    public SdaspringApplication(BirdRepository birdRepository, NestRepository nestRepository, FoodRepository foodRepository) {
         this.birdRepository = birdRepository;
+        this.nestRepository = nestRepository;
+        this.foodRepository = foodRepository;
     }
 
 
@@ -55,34 +63,34 @@ public class SdaspringApplication implements CommandLineRunner {
                 new TrackingDevice("TD-003", "2024-03-01"),
                 new TrackingDevice("TD-004", "2024-04-01")
         );
-//
-//        Nest nest1 = new Nest("Tree Nest", 5, "Twigs");
-//        Nest nest2 = new Nest("Ground Nest", 3, "Grass");
-//
-//        nestRepository.save(nest1);
-//        nestRepository.save(nest2);
-//
-//        birds.get(0).setNest(nest1);
-//        birds.get(1).setNest(nest1);
-//        birds.get(2).setNest(nest2);
-//        birds.get(3).setNest(nest2);
-//
-//        Food food1 = new Food("Fish", 100);
-//        Food food2 = new Food("Worms", 50);
-//        Food food3 = new Food("Seeds", 10);
-//        Food food4 = new Food("Berries", 25);
-//        Food food5 = new Food("Insects", 30);
-//
-//        foodRepository.save(food1);
-//        foodRepository.save(food2);
-//        foodRepository.save(food3);
-//        foodRepository.save(food4);
-//        foodRepository.save(food5);
-//
-//        birds.get(0).setFoods(List.of(food1));
-//        birds.get(1).setFoods(List.of(food2, food3));
-//        birds.get(2).setFoods(List.of(food3, food4));
-//        birds.get(3).setFoods(List.of(food1, food2, food5));
+
+        Nest nest1 = new Nest("Tree Nest", 5, "Twigs");
+        Nest nest2 = new Nest("Ground Nest", 3, "Grass");
+
+        nestRepository.save(nest1);
+        nestRepository.save(nest2);
+
+        birds.get(0).setNest(nest1);
+        birds.get(1).setNest(nest1);
+        birds.get(2).setNest(nest2);
+        birds.get(3).setNest(nest2);
+
+        Food food1 = new Food("Fish", 100);
+        Food food2 = new Food("Worms", 50);
+        Food food3 = new Food("Seeds", 10);
+        Food food4 = new Food("Berries", 25);
+        Food food5 = new Food("Insects", 30);
+
+        foodRepository.save(food1);
+        foodRepository.save(food2);
+        foodRepository.save(food3);
+        foodRepository.save(food4);
+        foodRepository.save(food5);
+
+        birds.get(0).setFoods(List.of(food1));
+        birds.get(1).setFoods(List.of(food2, food3));
+        birds.get(2).setFoods(List.of(food3, food4));
+        birds.get(3).setFoods(List.of(food1, food2, food5));
 
         for (int i = 0; i < birds.size(); i++) {
             Bird bird = birds.get(i);

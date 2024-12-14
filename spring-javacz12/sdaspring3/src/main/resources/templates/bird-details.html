@@ -30,23 +30,23 @@
                     <li> <strong>Activation Date: </strong> <span th:text="${bird.trackingDevice.activationDate}"></span> </li> <!-- takto inline v html piste -->
                 </ul>
             </li>
+            <li th:if="${bird.nest != null}">
+                <h4>Nest Information</h4>
+                <ul>
+                    <li> <strong>Name: </strong> <span th:text="${bird.nest.name}"></span> </li>
+                    <li> <strong>Capacity: </strong> <span th:text="${bird.nest.capacity}"></span> </li>
+                    <li> <strong>Material: </strong> <span th:text="${bird.nest.material}"></span> </li>
+                </ul>
+            </li>
+            <li th:if="${bird.foods.size() > 0}">
+                <h4>Foods</h4>
+                <ul>
+                    <li th:each="food : ${bird.foods}"> <span th:text="${food.name}"></span> - <span th:text="${food.calories}"></span> calories </li>
+                </ul>
+            </li>
         </ul>
 
-        <form id="add" th:action="@{/add-bird}" method="post">
-            <div class="div-add">
-                <label for="name">Name: </label>
-                <input id="name" type="text" name="name">
-            </div>
-            <div class="div-add">
-                <label for="canFly">Can fly: </label>
-                <input id="canFly" type="checkbox" name="canFly">
-            </div>
-            <div class="div-add">
-                <label for="weight">Weight: </label>
-                <input id="weight" type="number" name="weight" min="0" max="250000">
-            </div>
-            <button type="submit">Add bird</button>
-        </form>
+        <form th:replace="~{fragments/add-form :: create-bird-form}"></form>
 
     </main>
 
