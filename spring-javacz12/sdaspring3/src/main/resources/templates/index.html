@@ -34,9 +34,15 @@
         <table id="birds" th:if="${birds.size() > 0}">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Can Fly</th>
-                <th>Weight in grams</th>
+                <th>
+                    <a th:href="@{/(sortBy='name')}">Name</a>
+                </th>
+                <th>
+                    <a th:href="@{/(sortBy='canFly')}">Can Fly</a>
+                </th>
+                <th>
+                    <a th:href="@{/(sortBy='weight')}">Weight</a>
+                </th>
                 <th>Details</th>
                 <th>Delete</th>
                 <th>Increase Weight</th>
@@ -70,6 +76,17 @@
             </tr>
             </tbody>
         </table>
+
+        <nav th:if="${birds.size()}">
+            <ul>
+                <li th:if="${page > 0}" >
+                    <a th:href="@{/(page=${page - 1})}"> < </a>
+                </li>
+                <li th:if="${page + 1 < birds.size()}" >
+                    <a th:href="@{/(page=${page + 1})}"> > </a>
+                </li>
+            </ul>
+        </nav>
 
         <form th:replace="~{fragments/add-form :: create-bird-form}"></form>
 

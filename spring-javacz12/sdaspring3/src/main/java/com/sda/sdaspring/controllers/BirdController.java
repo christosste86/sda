@@ -12,6 +12,7 @@ import java.util.Objects;
 @Controller
 public class BirdController {
 
+    private final int PAGE_SIZE = 4;
     private final BirdService birdService;
 
     @Autowired
@@ -25,13 +26,19 @@ public class BirdController {
 //    }
 
     @GetMapping("/")
-    public String getMainPage(Model model, @RequestParam(value = "search", required = false) String search) {
+    public String getMainPage(Model model,
+                              @RequestParam(value = "search", required = false) String search,
+                              @RequestParam(value = "sortBy", required = false) String sortBy,
+                              @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
         model.addAttribute("welcomeString", "Welcome to the Charming Birdhouse");
         if (Objects.nonNull(search)) {
-            model.addAttribute("birds", birdService.getBirdsByName(search));
+            model.addAttribute("birds", birdService.getBirdsByName(search, page, PAGE_SIZE));
+        } else if (Objects.nonNull(sortBy)) {
+            model.addAttribute("birds", birdService.findAllSorted(sortBy, page, PAGE_SIZE));
         } else {
-            model.addAttribute("birds", birdService.getBirds());
+            model.addAttribute("birds", birdService.getBirds(page, PAGE_SIZE));
         }
+        model.addAttribute("page", page);
         return "index";
     }
 
@@ -69,14 +76,16 @@ public class BirdController {
     }
 
     @GetMapping("/flying-jpql")
-    public String findFlyingJPQL(Model model) {
-        model.addAttribute("birds", birdService.findFlyingJPQL());
+    public String findFlyingJPQL(Model model, @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
+        model.addAttribute("birds", birdService.findFlyingJPQL(page, PAGE_SIZE));
+        model.addAttribute("page", page);
         return "index";
     }
 
     @GetMapping("/flying-native")
-    public String findFlyingNative(Model model) {
-        model.addAttribute("birds", birdService.findFlyingNative());
+    public String findFlyingNative(Model model, @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
+        model.addAttribute("birds", birdService.findFlyingNative(page, PAGE_SIZE));
+        model.addAttribute("page", page);
         return "index";
     }
 }

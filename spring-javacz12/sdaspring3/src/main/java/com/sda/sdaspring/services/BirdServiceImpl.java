@@ -4,6 +4,9 @@ import com.sda.sdaspring.models.Bird;
 import com.sda.sdaspring.repositories.BirdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,8 +26,9 @@ public class BirdServiceImpl implements BirdService {
 
 
     @Override
-    public List<Bird> getBirds() {
-        return birdRepository.findAll();
+    public List<Bird> getBirds(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return birdRepository.findAll(pageable).getContent();
     }
 
     @Override
@@ -35,14 +39,15 @@ public class BirdServiceImpl implements BirdService {
     }
 
     @Override
-    public List<Bird> getBirdsByName(String search) {
+    public List<Bird> getBirdsByName(String search, int page, int size) {
 //        List<Bird> birds = new ArrayList<>();
 //        for (Bird bird : this.getBirds()) {
 //            if (bird.getName().toLowerCase().contains(search.toLowerCase())) {
 //                birds.add(bird);
 //            }
 //        }
-        return birdRepository.findBirdsByNameContainsIgnoreCase(search);
+        Pageable pageable = PageRequest.of(page, size);
+        return birdRepository.findBirdsByNameContainsIgnoreCase(search, pageable).getContent();
 //        return birds;
     }
 
@@ -70,13 +75,23 @@ public class BirdServiceImpl implements BirdService {
     }
 
     @Override
-    public List<Bird> findFlyingJPQL() {
-        return birdRepository.findAllFlyingBirds();
+    public List<Bird> findFlyingJPQL(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return birdRepository.findAllFlyingBirds(pageable).getContent();
     }
 
     @Override
-    public List<Bird> findFlyingNative() {
-        return birdRepository.findAllFlyingBirdsNative();
+    public List<Bird> findFlyingNative(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return birdRepository.findAllFlyingBirdsNative(pageable).getContent();
+    }
+
+    @Override
+    public List<Bird> findAllSorted(String parameter, int page, int size) {
+        // return birdRepository.findAllSortByParameter(parameter);
+        Sort sort = Sort.by(parameter);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return birdRepository.findAll(pageable).getContent();
     }
 
 

@@ -8,11 +8,11 @@ import java.util.List;
 public interface BirdService {
 
 
-    List<Bird> getBirds();
+    List<Bird> getBirds(int page, int size);
 
     Bird getBirdById(Long id);
 
-    List<Bird> getBirdsByName(String search);
+    List<Bird> getBirdsByName(String search, int page, int size);
 
     void createBird(Bird bird);
 
@@ -20,9 +20,9 @@ public interface BirdService {
 
     void updateBird(Long id);
 
-    List<Bird> findFlyingJPQL();
+    List<Bird> findFlyingJPQL(int page, int size);
 
-    List<Bird> findFlyingNative();
+    List<Bird> findFlyingNative(int page, int size);
 
-
+    List<Bird> findAllSorted(String parameter, int page, int size);
 }
